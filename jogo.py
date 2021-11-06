@@ -56,3 +56,29 @@ while comeca not in "não":
                         print('O jogador vencedor é : {}'.format(venceu))
                     else: 
                         print('Os jogadores que empataram foram : {}'.format(venceu))
+
+            else: 
+                print('Não há peças pra você. Pegue algo no monte!')
+                mao_jogador[jogador_inicial].append(monte[0])
+                del monte[0]
+        else: #significa que tem peça pra ser jogada 
+            if jogador_inicial == 0:
+
+                print('A suas peças são ', mao_jogador[jogador_inicial])
+                
+                print('A possiveis são ', [mao_jogador[jogador_inicial][i] for i in posicao])
+                peca_para_jogar = int(input('Escolha a sua peça {}'.format(posicao))) - 1
+
+                 
+            else:
+                peca_para_jogar = random.randint(0,len(posicao)-1) # as duas linhas atualizam a mesa com a peça da mao do jogador da vez, na posição da peça a ser jogada. 
+                peca_para_jogar = posicao[peca_para_jogar]
+            mesa = adiciona_na_mesa(mao_jogador[jogador_inicial][peca_para_jogar],mesa) 
+            del mao_jogador[jogador_inicial][peca_para_jogar]
+            if len(mao_jogador[jogador_inicial]) == 0: 
+                estado = False 
+                print('fim de jogo, quem venceu foi o jogador {}'.format(jogador_inicial))
+            else:
+                jogador_inicial  = proximo_player(numero,jogador_inicial)
+
+    comeca = input("Você quer jogar? (sim/não)").strip().lower()
