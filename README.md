@@ -1,1 +1,1 @@
-# EP2---2020.2
+---> Para exercutar o jogo de dominó, execute o arquivo jogo.py 
