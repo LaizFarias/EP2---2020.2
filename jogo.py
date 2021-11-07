@@ -15,6 +15,25 @@ print("\nBem-vindo(a) ao jogo de Dominó! O objetivo desse jogo é ficar sem pe�
 print("\nVamos começar!!!")
 
 
+def colorir(frase, cor):
+    # Tabela de cores - Usadas pela função "colorir"
+    RED   = "\033[1;31m"  
+    BLUE  = "\033[1;34m"
+    CYAN  = "\033[1;36m"
+    YELLOW  = "\033[1;33m"
+    GREEN = "\033[0;32m"
+    RESET = "\033[0;0m"
+    BOLD    = "\033[;1m"
+    REVERSE = "\033[;7m"
+    dicionario = {
+        'vermelho': RED,
+        'azul': BLUE,
+        'ciano': CYAN,
+        'amarelo': YELLOW,
+        'verde': GREEN,
+        'negrito': BOLD,
+    }
+    return dicionario[cor] + frase + RESET
 
 
 comeca = input("Você quer jogar? (sim/não)").strip().lower()
@@ -35,7 +54,8 @@ while comeca not in "não":
         #posições possiveis do jogador da vez 
         posicao = posicoes_possiveis(mesa,mao_jogador[jogador_inicial])
         #checa se precisa do monte 
-        print("As peças da mesa são: {} ".format(mesa))
+        frase = "As peças da mesa são: {} ".format(mesa)
+        print(colorir(frase, 'azul'))
         if posicao ==  []:
             if monte == []: #se o monte estiver vazio incrimenta o empate
                 print('Que pena, não tem peça no monte!')
@@ -64,20 +84,21 @@ while comeca not in "não":
         else: #significa que tem peça pra ser jogada 
             if jogador_inicial == 0:
 
-                print('A suas peças são ', mao_jogador[jogador_inicial])
+                frase = ('A suas peças são {}'.format(mao_jogador[jogador_inicial]))
+                print(colorir(frase, 'amarelo'))
                 
-                print('A possiveis são ', [mao_jogador[jogador_inicial][i] for i in posicao])
+                print(colorir('A possiveis são {} '.format([mao_jogador[jogador_inicial][i] for i in posicao]), 'verde'))
                 peca_para_jogar = int(input('Escolha a sua peça {}'.format(posicao))) - 1
 
-                 
             else:
                 peca_para_jogar = random.randint(0,len(posicao)-1) # as duas linhas atualizam a mesa com a peça da mao do jogador da vez, na posição da peça a ser jogada. 
                 peca_para_jogar = posicao[peca_para_jogar]
+
             mesa = adiciona_na_mesa(mao_jogador[jogador_inicial][peca_para_jogar],mesa) 
             del mao_jogador[jogador_inicial][peca_para_jogar]
             if len(mao_jogador[jogador_inicial]) == 0: 
                 estado = False 
-                print('fim de jogo, quem venceu foi o jogador {}'.format(jogador_inicial))
+                print(colorir('fim de jogo, quem venceu foi o jogador {}'.format(jogador_inicial), 'vermelho'))
             else:
                 jogador_inicial  = proximo_player(numero,jogador_inicial)
 
