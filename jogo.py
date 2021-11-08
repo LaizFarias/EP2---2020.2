@@ -73,9 +73,9 @@ while comeca not in "não":
                         if soma_pontos[jogador] == ganhador:
                             venceu.append(jogador+1)
                     if len(venceu) == 1: 
-                        print('O jogador vencedor é : {}'.format(venceu))
+                        print(colorir('O jogador vencedor é : {}'.format(venceu), 'vermelho'))
                     else: 
-                        print('Os jogadores que empataram foram : {}'.format(venceu))
+                        print(colorir('Os jogadores que empataram foram : {}'.format(venceu), 'vermelho'))
 
             else: 
                 print('Não há peças pra você. Pegue algo no monte!')
@@ -89,6 +89,12 @@ while comeca not in "não":
                 
                 print(colorir('A possiveis são {} '.format([mao_jogador[jogador_inicial][i] for i in posicao]), 'verde'))
                 peca_para_jogar = int(input('Escolha a sua peça {}'.format(posicao))) - 1
+
+                if (peca_para_jogar+1) not in posicao:
+                    while (peca_para_jogar+1) not in posicao:
+                        print('Não temos essa peça!')
+                        peca_para_jogar = int(input('Escolha a sua peça {}'.format(posicao))) - 1
+
 
             else:
                 peca_para_jogar = random.randint(0,len(posicao)-1) # as duas linhas atualizam a mesa com a peça da mao do jogador da vez, na posição da peça a ser jogada. 
